@@ -5,24 +5,20 @@ function ForgotPassword() {
   const [email, setEmail] = useState("");
 
   const sendResetMail = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
+
+  try {
     const res = await API.post("/forgot-password", {
-  email,
-});
+      email,
+    });
 
-window.location.href = res.data.reset_link;
+    window.location.href = res.data.reset_link;
 
-    try {
-      const response = await API.post("/forgot-password", {
-        email,
-      });
-
-      alert(response.data.message);
-    } catch (err) {
-      console.log(err);
-      alert("Failed to send reset email");
-    }
-  };
+  } catch (err) {
+    console.log(err);
+    alert("Failed to generate reset link");
+  }
+};
 
   return (
     <div
