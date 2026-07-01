@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import API from "../services/api";
 
 
@@ -63,6 +63,35 @@ function Login() {
         </h2>
 
         <form onSubmit={handleLogin}>
+          <div style={{ marginTop: "20px", textAlign: "center" }}>
+
+  <p>
+    <Link
+      to="/forgot-password"
+      style={{
+        color: "#007bff",
+        textDecoration: "none",
+      }}
+    >
+      Forgot Password?
+    </Link>
+  </p>
+
+  <p style={{ marginTop: "10px" }}>
+    Don't have an account?{" "}
+    <Link
+      to="/register"
+      style={{
+        color: "#007bff",
+        textDecoration: "none",
+        fontWeight: "bold",
+      }}
+    >
+      Register
+    </Link>
+  </p>
+
+</div>
 
           <input
             type="email"
