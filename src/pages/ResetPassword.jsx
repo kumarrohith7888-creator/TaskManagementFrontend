@@ -1,8 +1,11 @@
 import { useState } from "react";
 import API from "../services/api";
+import { useSearchParams } from "react-router-dom";
 
 function ResetPassword() {
-  const [token, setToken] = useState("");
+  const [searchParams] = useSearchParams();
+
+  const token = searchParams.get("token");
   const [newPassword, setNewPassword] = useState("");
 
   const resetPassword = async (e) => {
@@ -27,12 +30,10 @@ function ResetPassword() {
 
       <form onSubmit={resetPassword}>
 
-        <input
-          type="text"
-          placeholder="Reset Token"
-          value={token}
-          onChange={(e) => setToken(e.target.value)}
-        />
+        await API.post("/reset-password",
+          token,
+          new_password: newPassword,
+        );
 
         <br /><br />
 

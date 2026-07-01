@@ -6,6 +6,11 @@ function ForgotPassword() {
 
   const sendResetMail = async (e) => {
     e.preventDefault();
+    const res = await API.post("/forgot-password", {
+  email,
+});
+
+window.location.href = res.data.reset_link;
 
     try {
       const response = await API.post("/forgot-password", {
