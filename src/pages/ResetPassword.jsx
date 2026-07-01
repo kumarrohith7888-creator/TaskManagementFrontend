@@ -1,9 +1,10 @@
 import { useState } from "react";
 import API from "../services/api";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 
 function ResetPassword() {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   const token = searchParams.get("token");
   const [newPassword, setNewPassword] = useState("");
@@ -13,11 +14,14 @@ function ResetPassword() {
 
     try {
       const res = await API.post("/reset-password", {
-        token,
+        token: token,
         new_password: newPassword,
       });
 
       alert(res.data.message);
+
+      navigate("/");
+
     } catch (err) {
       console.log(err);
       alert("Reset Failed");
@@ -25,32 +29,57 @@ function ResetPassword() {
   };
 
   return (
-    <div style={{ padding: "40px" }}>
-      <h1>Reset Password</h1>
+    <div
+      style={{
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        background: "#f5f5f5",
+      }}
+    >
+      <div
+        style={{
+          width: "350px",
+          padding: "30px",
+          background: "white",
+          borderRadius: "10px",
+          boxShadow: "0 0 10px rgba(0,0,0,.2)",
+        }}
+      >
+        <h2 style={{ textAlign: "center" }}>Reset Password</h2>
 
-      <form onSubmit={resetPassword}>
+        <form onSubmit={resetPassword}>
 
-        await API.post("/reset-password",
-          token,
-          new_password: newPassword,
-        );
+          <input
+            type="password"
+            placeholder="New Password"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+            style={{
+              width: "100%",
+              padding: "10px",
+              marginTop: "20px",
+            }}
+          />
 
-        <br /><br />
+          <button
+            type="submit"
+            style={{
+              width: "100%",
+              padding: "10px",
+              marginTop: "20px",
+              background: "#007bff",
+              color: "white",
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
+            Reset Password
+          </button>
 
-        <input
-          type="password"
-          placeholder="New Password"
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
-        />
-
-        <br /><br />
-
-        <button type="submit">
-          Reset Password
-        </button>
-
-      </form>
+        </form>
+      </div>
     </div>
   );
 }
