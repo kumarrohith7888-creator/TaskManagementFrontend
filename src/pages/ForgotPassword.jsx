@@ -14,7 +14,7 @@ function ForgotPassword() {
 
 console.log(res.data);
 
-window.location.href = res.data.reset_link;
+alert("Password reset email sent successfully. Please check your email.");
 
   } catch (err) {
     console.log("ERROR:", err.response);
