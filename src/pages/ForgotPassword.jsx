@@ -9,13 +9,12 @@ function ForgotPassword() {
 
   try {
     const res = await API.post("/forgot-password", {
-      email,
-    });
+  email,
+});
 
-    console.log("SUCCESS:", res.data);
+console.log(res.data);
 
-    // Temporary ga redirect cheyyaku
-    alert(JSON.stringify(res.data));
+window.location.href = res.data.reset_link;
 
   } catch (err) {
     console.log("ERROR:", err.response);
