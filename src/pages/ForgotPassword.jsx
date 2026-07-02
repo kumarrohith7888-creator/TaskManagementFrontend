@@ -12,11 +12,14 @@ function ForgotPassword() {
       email,
     });
 
-    window.location.href = res.data.reset_link;
+    console.log("SUCCESS:", res.data);
+
+    // Temporary ga redirect cheyyaku
+    alert(JSON.stringify(res.data));
 
   } catch (err) {
+    console.log("ERROR:", err.response);
     console.log(err);
-    alert("Failed to generate reset link");
   }
 };
 
